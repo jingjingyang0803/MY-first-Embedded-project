@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Mario Mene</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+	<script src="jquery-1.11.3.min.js"></script>
+	<link href="roundslider.min.css" rel="stylesheet" />
+	<link rel="icon" href="data:,">
+	<script src="roundslider.min.js"></script>
+</head>
+
+
+<style>
+	body {
+		background-color: #E9E9E9;
+		font-size: 16px;
+		text-align: center;
+	}
+
+	input[type="text"] {
+		font-size: 15px;
+	}
+
+	.container {
+		margin-left: auto;
+		margin-right: auto;
+		padding: 10px;
+		border: 5px dotted;
+		overflow: hidden;
+		height: 700px;
+		width: 450px;
+		background-color: azure;
+	}
+
+	/*================= steering wheel slider=============== */
+	.round_slider {
+		margin-left: auto;
+		margin-right: auto;
+		width: 300px;
+		height: 300px;
+	}
+
+	#steering_wheel {
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	/*================ move slider ======================*/
+	.bar_slider {
+		margin-left: auto;
+		margin-right: auto;
+		width: 300px;
+		height: 80px;
+	}
+
+	#set_go {
+		-webkit-appearance: none;
+		/* Override default CSS styles */
+		appearance: none;
+		width: 100%;
+		/* Full-width */
+		height: 25px;
+		/* Specified height */
+		background: #d3d3d3;
+		/* Grey background */
+		outline: none;
+		/* Remove outline */
+		opacity: 0.7;
+		/* Set transparency (for mouse-over effects on hover) */
+		-webkit-transition: .2s;
+		/* 0.2 seconds transition on hover */
+		transition: opacity .2s;
+	}
+
+	/* Mouse-over effects */
+	#set_go:hover {
+		opacity: 1;
+		/* Fully shown on mouse-over */
+	}
+
+	/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+	#set_go::-webkit-slider-thumb {
+		-webkit-appearance: none;
+		/* Override default look */
+		appearance: none;
+		width: 25px;
+		/* Set a specific slider handle width */
+		height: 30px;
+		/* Slider handle height */
+		background: #04AA6D;
+		/* Green background */
+		cursor: pointer;
+		/* Cursor on hover */
+	}
+
+	#set_go::-moz-range-thumb {
+		width: 25px;
+		/* Set a specific slider handle width */
+		height: 25px;
+		/* Slider handle height */
+		background: #017869;
+		/* Green background */
+		cursor: pointer;
+		/* Cursor on hover */
+	}
+
+	/* =================led switch=================*/
+	.switch {
+		position: relative;
+		display: inline-block;
+		width: 80px;
+		height: 40px
+	}
+
+	.switch input {
+		display: none
+	}
+
+	.sw_slider {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: #ccc;
+		border-radius: 6px
+	}
+
+	.sw_slider:before {
+		position: absolute;
+		content: "";
+		height: 30px;
+		width: 30px;
+		left: 5px;
+		bottom: 5px;
+		background-color: #fff;
+		-webkit-transition: .4s;
+		transition: .4s;
+		border-radius: 3px
+	}
+
+	input:checked+.sw_slider {
+		background-color: #D8473A
+	}
+
+	input:checked+.sw_slider:before {
+		-webkit-transform: translateX(52px);
+		-ms-transform: translateX(52px);
+		transform: translateX(40px)
+	}
+</style>
+
+
+<body style="padding: 10px 0 0 20px; font-family: monospace;">
+	<div class="container">
+		<div class="bar_slider">
+			Speed: <input type="range" min="0" max="255" id="speed"><p id="showSpeed" style="display:inline-block">100</p>
+		</div>
+		<div class="round_slider">
+			<div id="steering_wheel"></div> <br><br><br>
+			TO TURN: <input type="text" size="20" id="turning">
+		</div>
+		<div class="bar_slider">
+			<input type="range" min="-50" max="50" id="set_go">
+			<p id="showDist">0</p>
+			TO MOVE: <input type="text" size="15" id="moving">
+		</div>
+		<div>
+			<br><br>
+			<h3 style="color:#D8473A;">LED Switch</h3>
+			<label class="switch"><input type="checkbox" onchange="toggleCheckbox(this)" id="led"><span
+					class="sw_slider"></span></label>
+		</div>
+		<h2 style="color:rgb(0, 140, 255);"> Mario Mene !!!</h2>
+	</div>
+</body>
+
+
+<script type="text/javascript">
+	var speed = 100;
+	var dire = 0;		  // direction				  	 
+	var dist = 0;		  // distance
+	var led_state = 0;    // led on/off, 0 is off, 1 is on
+
+	// =========================== set speed =================================================================
+	$('#speed').val(100);
+
+	document.getElementById("speed").oninput = function () {
+		$('#showSpeed').html(this.value);
+	}
+
+	$('#speed').click(function () {
+		speed = this.value; // Update the current dist value (each time you drag the slider handle and stop)
+		console.log("speed: " + speed);
+
+		xmlHttp.open("GET", '/?speed=' + speed, true);
+		xmlHttp.send(null);
+	});
+
+	// =========================== set the turning degree ====================================================
+	$('#turning').val(0);
+
+	var xmlHttp = new XMLHttpRequest();
+
+	$(document).ready(function () {
+		$("#steering_wheel").roundSlider
+			(
+				{
+					radius: 95,
+					min: -180,
+					max: 180,
+					circleShape: "pie",
+					sliderType: "min-range",
+					value: 0,
+					startAngle: 315,
+
+					change: function (args) {
+						dire = args.value;			 // direction variable set
+						console.log("direction: " + dire);
+						$('#turning').val((dire > 0 ? " Right " : " Left ") + Math.abs(dire) + " degree");
+						xmlHttp.open("GET", '/?dire=' + dire, true);
+						xmlHttp.send(null);
+					}
+				}
+			);
+	});
+	// =========================== set the driving distance ================================================
+	$('#set_go').val(0);
+	$('#moving').val(0);
+
+	document.getElementById("set_go").oninput = function () {
+		$('#showDist').html(this.value);
+	}
+
+	$('#set_go').click(function () {
+		dist = this.value; // Update the current dist value (each time you drag the slider handle and stop)
+		$('#moving').val((dist > 0 ? " Forward " : " Backward ") + Math.abs(dist) + "cm");
+		console.log("distance: " + dist);
+
+		xmlHttp.open("GET", '/?dist=' + dist, true);
+		xmlHttp.send(null);
+	});
+
+	// =========================== set the LED state ========================================================
+	function toggleCheckbox(element) {
+		if (element.checked) {
+			led_state = 1;
+		}
+		else {
+			led_state = 0;
+		}
+		console.log("led_state: " + (led_state == 0 ? "OFF" : "ON"));
+
+		xmlHttp.open("GET", '/?led_state=' + led_state, true);
+		xmlHttp.send(null);
+	}		
+</script>
+
+
+</html>
