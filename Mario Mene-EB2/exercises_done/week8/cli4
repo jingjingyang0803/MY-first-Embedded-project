@@ -1,0 +1,92 @@
+#!/usr/bin/env python3
+
+import time
+import os
+
+class Foreground:
+    Green = "\033[38;5;46m"
+    Yellow = "\033[38;5;226m"
+    Red = "\033[38;5;196m"
+
+class Background:
+    Grey = "\033[48;5;248m"
+    DarkGrey = "\033[48;5;238m"
+    Green = "\033[48;5;46m"
+    Yellow = "\033[48;5;226m"
+    Red = "\033[48;5;196m"
+
+Reset = "\033[0;0m"
+
+def Position(x, y):
+    return f"\033[{x};{y}H"
+
+def TrafficLight(state):
+    print(f"{Position(4, 15)}{Background.DarkGrey}      ")
+    print(f"{Position(5, 15)}{Background.DarkGrey} {Background.Grey}    {Background.DarkGrey} ")
+    print(f"{Position(6, 15)}{Background.DarkGrey} {Background.Grey} {Background.DarkGrey}  {Background.Grey} {Background.DarkGrey} ")
+    print(f"{Position(7, 15)}{Background.DarkGrey} {Background.Grey}    {Background.DarkGrey} ")
+    print(f"{Position(8, 15)}{Background.DarkGrey}      ")
+    print(f"{Position(9, 15)}{Background.DarkGrey} {Background.Grey}    {Background.DarkGrey} ")
+    print(f"{Position(10, 15)}{Background.DarkGrey} {Background.Grey} {Background.DarkGrey}  {Background.Grey} {Background.DarkGrey} ")
+    print(f"{Position(11, 15)}{Background.DarkGrey} {Background.Grey}    {Background.DarkGrey} ")
+    print(f"{Position(12, 15)}{Background.DarkGrey}      ")
+    print(f"{Position(13, 15)}{Background.DarkGrey} {Background.Grey}    {Background.DarkGrey} ")
+    print(f"{Position(14, 15)}{Background.DarkGrey} {Background.Grey} {Background.DarkGrey}  {Background.Grey} {Background.DarkGrey} ")
+    print(f"{Position(15, 15)}{Background.DarkGrey} {Background.Grey}    {Background.DarkGrey} ")
+    print(f"{Position(16, 15)}{Background.DarkGrey}      ")
+
+    if state == 0:
+        print(f"{Position(6, 15)}{Background.DarkGrey} {Background.Grey} {Background.Red}  {Background.Grey} {Background.DarkGrey} ")
+    elif state == 1:
+        print(f"{Position(6, 15)}{Background.DarkGrey} {Background.Grey} {Background.Red}  {Background.Grey} {Background.DarkGrey} ")
+        print(f"{Position(10, 15)}{Background.DarkGrey} {Background.Grey} {Background.Yellow}  {Background.Grey} {Background.DarkGrey} ")
+    elif state == 2:
+        print(f"{Position(14, 15)}{Background.DarkGrey} {Background.Grey} {Background.Green}  {Background.Grey} {Background.DarkGrey} ")
+    elif state == 3:
+        print(f"{Position(10, 15)}{Background.DarkGrey} {Background.Grey} {Background.Yellow}  {Background.Grey} {Background.DarkGrey} ")
+
+'''
+while True:
+    print(f"{Position(5, 15)}{Background.DarkGrey} {Background.Grey}    {Background.DarkGrey} ")
+    print(f"{Position(6, 15)}{Background.DarkGrey} {Background.Grey} {Background.Red}  {Background.Grey} {Background.DarkGrey} ")
+    print(f"{Position(7, 15)}{Background.DarkGrey} {Background.Grey}    {Background.DarkGrey} ")
+    print(f"{Position(8, 15)}{Background.DarkGrey} {Background.Grey}    {Background.DarkGrey} ")
+    print(f"{Position(9, 15)}{Background.DarkGrey} {Background.Grey}    {Background.DarkGrey} ")
+    print(f"{Position(10, 15)}{Background.DarkGrey} {Background.Grey}    {Background.DarkGrey} ")
+    print(f"{Position(11, 15)}{Background.DarkGrey} {Background.Grey}    {Background.DarkGrey} ")
+    time.sleep(2)
+    print(f"{Position(5, 15)}{Background.DarkGrey} {Background.Grey}    {Background.DarkGrey} ")
+    print(f"{Position(6, 15)}{Background.DarkGrey} {Background.Grey} {Background.Red}  {Background.Grey} {Background.DarkGrey} ")
+    print(f"{Position(7, 15)}{Background.DarkGrey} {Background.Grey}    {Background.DarkGrey} ")
+    print(f"{Position(8, 15)}{Background.DarkGrey} {Background.Grey} {Background.Yellow}  {Background.Grey} {Background.DarkGrey} ")
+    print(f"{Position(9, 15)}{Background.DarkGrey} {Background.Grey}    {Background.DarkGrey} ")
+    print(f"{Position(10, 15)}{Background.DarkGrey} {Background.Grey}    {Background.DarkGrey} ")
+    print(f"{Position(11, 15)}{Background.DarkGrey} {Background.Grey}    {Background.DarkGrey} ")
+    time.sleep(2)
+    print(f"{Position(5, 15)}{Background.DarkGrey} {Background.Grey}    {Background.DarkGrey} ")
+    print(f"{Position(6, 15)}{Background.DarkGrey} {Background.Grey}    {Background.DarkGrey} ")
+    print(f"{Position(7, 15)}{Background.DarkGrey} {Background.Grey}    {Background.DarkGrey} ")
+    print(f"{Position(8, 15)}{Background.DarkGrey} {Background.Grey}    {Background.DarkGrey} ")
+    print(f"{Position(9, 15)}{Background.DarkGrey} {Background.Grey}    {Background.DarkGrey} ")
+    print(f"{Position(10, 15)}{Background.DarkGrey} {Background.Grey} {Background.Green}  {Background.Grey} {Background.DarkGrey} ")
+    print(f"{Position(11, 15)}{Background.DarkGrey} {Background.Grey}    ")
+    time.sleep(2)
+    print(f"{Position(5, 15)}{Background.DarkGrey} {Background.Grey}    {Background.DarkGrey} ")
+    print(f"{Position(6, 15)}{Background.DarkGrey} {Background.Grey}    {Background.DarkGrey} ")
+    print(f"{Position(7, 15)}{Background.DarkGrey} {Background.Grey}    {Background.DarkGrey} ")
+    print(f"{Position(8, 15)}{Background.DarkGrey} {Background.Grey} {Background.Yellow}  {Background.Grey} {Background.DarkGrey} ")
+    print(f"{Position(9, 15)}{Background.DarkGrey} {Background.Grey}    {Background.DarkGrey} ")
+    print(f"{Position(10, 15)}{Background.DarkGrey} {Background.Grey}    {Background.DarkGrey} ")
+    print(f"{Position(11, 15)}{Background.DarkGrey} {Background.Grey}    {Background.DarkGrey} ")
+    time.sleep(2)
+    '''
+
+while True:
+    TrafficLight(0)
+    time.sleep(2)
+    TrafficLight(1)
+    time.sleep(2)
+    TrafficLight(2)
+    time.sleep(2)
+    TrafficLight(3)
+    time.sleep(2)

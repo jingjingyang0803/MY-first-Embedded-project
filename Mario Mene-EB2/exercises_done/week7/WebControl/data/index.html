@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Mario Mene</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+	<script src="jquery-1.11.3.min.js"></script>
+	<link href="roundslider.min.css" rel="stylesheet" />
+	<link href="style.css" rel="stylesheet" />
+	<link rel="icon" href="data:,">
+	<script src="roundslider.min.js"></script>
+</head>
+
+<body>
+	<div class="container">
+
+		<div class="box_display">
+			<div class="compass-container">
+				<img id="compass-pointer" src="compass.png" alt="COMPASS PLACEHOLDER" />
+			</div>
+			<h2 id="mega_string">" "</h2>
+			<h2 id="compass_value">Degree &#176</h2>
+
+			<h2 id="lider_value">Distance cm</h2>
+			<div class="progress-bar-container" style="height: 20px; width: 100%; background-color: #017869;">
+				<div id="progress-bar" style="height: 20px; background-color: #04AA6D;"></div>
+			</div>
+		</div>
+
+		<div class="box_control">
+			<div class="bar_slider">
+				Speed: <input type="range" min="0" max="255" id="speed">
+				<p id="showSpeed" style="display:inline-block">100</p>
+			</div><br>
+			<div class="round_slider">
+				<div id="steering_wheel"></div><br>
+				&nbsp&nbsp&nbsp TO TURN: &nbsp&nbsp&nbsp&nbsp<input type="text" size="10" id="turning">
+			</div>
+			<div class="bar_slider">
+				<input type="range" min="-50" max="50" id="set_go">
+				<span id="showDist">0</span><br><br>
+				TO MOVE: <input type="text" size="15" id="moving">
+			</div>
+		</div>
+
+	</div>
+
+	<script type="text/javascript" src="script.js"></script>
+
+</body>
+</html>

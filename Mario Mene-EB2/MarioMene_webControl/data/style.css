@@ -1,0 +1,178 @@
+body {
+   font-size: 16px;
+   text-align: center;
+   padding: 10px 0 0 20px;
+   font-family: monospace;
+}
+
+input[type="text"] {
+   font-size: 15px;
+}
+
+.container {
+   margin-left: auto;
+   margin-right: auto;
+   overflow: hidden;
+   width: 800px;
+   background-color: azure;
+   display: flex;
+   flex-direction: row;
+}
+
+.box_display {
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: center;
+   padding: 5px;
+   width: 40%;
+}
+
+.box_display > * {
+   margin: 10px 0 10px 0;
+}
+
+.box_control {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   padding: 5px;
+   overflow: hidden;
+   width: 60%;
+}
+
+/*================= compass =========================== */
+
+
+#compass-pointer {
+   padding: 1px;
+   height: 300px;
+   width: 300px;
+}
+
+@keyframes rotation {
+   from {
+     transform: rotate(0deg);
+   }
+   to {
+     transform: rotate(359deg);
+   }
+ }
+
+/*================= steering wheel slider=============== */
+.round_slider {
+   margin-left: auto;
+   margin-right: auto;
+   width: 300px;
+   height: 250px;
+}
+
+#steering_wheel {
+   margin-left: auto;
+   margin-right: auto;
+   margin-bottom: 10px;
+}
+
+/*================ move slider ======================*/
+.bar_slider {
+   margin-left: auto;
+   margin-right: auto;
+   width: 300px;
+   height: 30px;
+}
+
+#set_go {
+   -webkit-appearance: none;
+   /* Override default CSS styles */
+   appearance: none;
+   width: 100%;
+   /* Full-width */
+   height: 20px;
+   /* Specified height */
+   background: #d3d3d3;
+   /* Grey background */
+   outline: none;
+   /* Remove outline */
+   opacity: 0.7;
+   /* Set transparency (for mouse-over effects on hover) */
+   -webkit-transition: .2s;
+   /* 0.2 seconds transition on hover */
+   transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+#set_go:hover {
+   opacity: 1;
+   /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+#set_go::-webkit-slider-thumb {
+   -webkit-appearance: none;
+   /* Override default look */
+   appearance: none;
+   width: 25px;
+   /* Set a specific slider handle width */
+   height: 30px;
+   /* Slider handle height */
+   background: #04AA6D;
+   /* Green background */
+   cursor: pointer;
+   /* Cursor on hover */
+}
+
+#set_go::-moz-range-thumb {
+   width: 25px;
+   /* Set a specific slider handle width */
+   height: 25px;
+   /* Slider handle height */
+   background: #017869;
+   /* Green background */
+   cursor: pointer;
+   /* Cursor on hover */
+}
+
+/* =================led switch=================*/
+.switch {
+   position: relative;
+   display: inline-block;
+   width: 80px;
+   height: 40px
+}
+
+.switch input {
+   display: none
+}
+
+.sw_slider {
+   position: absolute;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   background-color: #ccc;
+   border-radius: 6px
+}
+
+.sw_slider:before {
+   position: absolute;
+   content: "";
+   height: 30px;
+   width: 30px;
+   left: 5px;
+   bottom: 5px;
+   background-color: #fff;
+   -webkit-transition: .4s;
+   transition: .4s;
+   border-radius: 3px
+}
+
+input:checked+.sw_slider {
+   background-color: #D8473A
+}
+
+input:checked+.sw_slider:before {
+   -webkit-transform: translateX(52px);
+   -ms-transform: translateX(52px);
+   transform: translateX(40px)
+}
