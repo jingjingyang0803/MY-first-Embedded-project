@@ -18,6 +18,35 @@ The Lego Robot Car Project was a team effort to build and program a remote-contr
 - **ESP8266**: Wi-Fi module that connects the car to the internet for remote control.
 - **Sensors**: Distance detection sensors are used for obstacle detection and avoidance.
 
+## Installation & Setup
+
+1. **Install Arduino IDE**:  
+   Download and install the Arduino IDE from [here](https://www.arduino.cc/en/software).
+
+2. **Set up the hardware**:  
+   - Connect the **ESP8266** module and sensors to the Arduino board according to the schematics.
+   - Upload the C++ control code to the Arduino using the Arduino IDE.
+
+3. **Install dependencies**:  
+   Ensure the following libraries are installed in the Arduino IDE:
+
+   - **ESP8266WiFi**: Provides WiFi support for the ESP8266 module.
+   - **ESPAsyncTCP**: Enables asynchronous TCP communication on the ESP8266, needed for efficient web server communication.
+   - **ESPAsyncWebServer**: Allows you to create a non-blocking web server that can handle multiple connections.
+   - **FS**: Provides support for the SPIFFS file system to store files on the ESP8266.
+   - **Wire**: Supports I2C communication for sensors or devices connected via the I2C protocol.
+   - **PubSubClient**: A lightweight library for MQTT communication, allowing the ESP8266 to act as a client to an MQTT broker.
+   - **ArduinoJson**: A powerful library for parsing and generating JSON, which is useful for formatting and exchanging data over HTTP or MQTT.
+  
+You can install these libraries using the **Library Manager** in the Arduino IDE by navigating to **Sketch > Include Library > Manage Libraries**, then searching for each library by name and clicking "Install".
+
+
+4. **Run the MQTT broker**:  
+   Set up a local or cloud-based MQTT broker (e.g., Mosquitto) to handle real-time communication between the robot car and the remote control system.
+
+5. **Configure the REST API**:  
+   Ensure the REST API server is running to handle any additional commands or data exchange with the car.
+
 ## How to Use
 
 1. Power on the Lego robot car and ensure it's connected to Wi-Fi through the **ESP8266** module.
